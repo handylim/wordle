@@ -1,0 +1,14 @@
+@layer components {
+	.btn {
+		@apply text-white
+		rounded-sm
+		cursor-pointer
+		transition duration-150
+		px-4 py-2;
+	}
+
+	.btn-primary {
+		@apply bg-blue-500 dark:bg-blue-600
+		hover:bg-blue-600 dark:hover:bg-blue-700
+	}
+}
