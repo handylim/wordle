@@ -1,0 +1,43 @@
+# Ignore node modules, as we will install them inside the Docker container
+node_modules
+*.log
+
+# Ignore build output
+dist
+build
+
+# Ignore git repository files
+.git
+.gitignore
+
+# Ignore Docker-related files
+Dockerfile
+.dockerignore
+
+# Ignore local environment files
+.env
+.env.local
+.env.*.local
+.vscode
+.idea
+
+# Ignore editor or OS-specific files
+.DS_Store
+Thumbs.db
+*.swp
+
+# Ignore test files and configurations
+__tests__
+__mocks__
+coverage
+*.spec.js
+*.test.js
+*.spec.ts
+*.test.ts
+jest.config.js
+cypress/
+cypress.json
+
+# Ignore TypeScript build artifacts (if using TypeScript)
+*.tsbuildinfo
+tsconfig.tsbuildinfo
