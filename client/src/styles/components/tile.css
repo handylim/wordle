@@ -22,4 +22,8 @@
 		@apply bg-green-500 dark:bg-green-700
 		border-green-500 dark:border-green-700;
 	}
+
+	.is-active {
+		@apply border-blue-800 dark:border-blue-500
+	}
 }

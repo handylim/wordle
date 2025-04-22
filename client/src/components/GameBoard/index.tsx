@@ -1,12 +1,24 @@
-import React                                    from 'react';
-import { useHotkeys }                           from 'react-hotkeys-hook';
-import { useAppDispatch, useAppSelector }       from '@/store';
-import { addLetter, removeLetter, submitGuess } from '@/store/features/game/slice';
-import { Letter, letters, LetterStatusType }    from '@/types/game';
-import { cn }                                   from '@/utils/tailwind';
+import React                                         from 'react';
+import { useHotkeys }                                from 'react-hotkeys-hook';
+import { createSelector }                            from '@reduxjs/toolkit'
+import { RootState, useAppDispatch, useAppSelector } from '@/store';
+import { addLetter, removeLetter, submitGuess }      from '@/store/features/game/thunk';
+import { Row }                                       from '@/components/GameBoard/Row';
+import { GameStatus, Letter, letters }               from '@/types/game';
+
+const selectGame = createSelector(
+	(state: RootState) => state.game,
+	game => ({
+		status      : game.status,
+		maxRounds   : game.maxRounds,
+		currentGuess: game.currentGuess,
+		currentRound: game.currentRound,
+		guesses     : game.guesses
+	})
+);
 
 export const GameBoard: React.FC = () => {
-	const game     = useAppSelector(state => state.game)
+	const game     = useAppSelector(selectGame)
 	const dispatch = useAppDispatch()
 
 	useHotkeys(['enter', 'backspace', ...letters],
@@ -31,31 +43,11 @@ export const GameBoard: React.FC = () => {
 			{
 				Array.from({ length: game.maxRounds })
 				     .map((_, rowIndex) =>
-					          <div key={ rowIndex }
-					               role='row'
-					               aria-rowindex={ rowIndex + 1 }
-					               className='grid grid-cols-5 gap-2'>
-						          {
-							          Array.from({ length: game.answer.length })
-							               .map((_, colIndex) =>
-								                    <div key={ colIndex }
-								                         role='gridcell'
-								                         aria-colindex={ colIndex + 1 }
-								                         aria-label={ `Cell ${rowIndex + 1}-${colIndex + 1}` }
-								                         className={ cn('tile',
-								                                        {
-									                                        'tile--miss'   : game.guesses[rowIndex]?.[colIndex].status === LetterStatusType.MISS,
-									                                        'tile--present': game.guesses[rowIndex]?.[colIndex].status === LetterStatusType.PRESENT,
-									                                        'tile--hit'    : game.guesses[rowIndex]?.[colIndex].status === LetterStatusType.HIT
-								                                        }) }>
-									                    {
-										                    game.currentRound === (rowIndex + 1)
-										                    ? game.currentGuess[colIndex]?.toUpperCase() ?? ''
-										                    : game.guesses[rowIndex]?.[colIndex].letter.toUpperCase()
-									                    }
-								                    </div>)
-						          }
-					          </div>)
+					          <Row key={ rowIndex }
+					               rowIndex={ rowIndex + 1 }
+					               guess={ game.guesses[rowIndex] }
+					               currentGuess={ game.currentRound === rowIndex + 1 ? game.currentGuess.join('') : '' }
+					               isActive={ game.status === GameStatus.PLAYING && game.currentRound === rowIndex + 1 } />)
 			}
 		</div>
 	);

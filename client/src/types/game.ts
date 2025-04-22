@@ -1,17 +1,10 @@
-import { Nullable } from 'tsdef';
-
 export interface GameState { // store the game state
 	id: string
 	status: GameStatus
 	maxRounds: number
-	answer: string
 	currentGuess: Array<Letter>
 	currentRound: number
 	guesses: Array<Guess>
-	alert: Nullable<{
-		type: 'INFO' | 'WARN' | 'ERROR'
-		message: string
-	}>
 }
 
 export const letters = [
@@ -36,7 +29,7 @@ export enum LetterStatusType {
 
 export enum GameStatus {
 	IDLE    = 'IDLE', // before game starts
-	WIN     = 'WIN', // player guess the word before running out of chances
-	LOSE    = 'LOSE', // player failed to guess the word before running out of chances
+	WON     = 'WON', // player guess the word before running out of chances
+	LOST    = 'LOST', // player failed to guess the word before running out of chances
 	PLAYING = 'PLAYING' // in-game
 }

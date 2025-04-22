@@ -1,7 +1,7 @@
 import { createRootRoute, HeadContent, Outlet, useMatches } from '@tanstack/react-router';
 import { TanStackRouterDevtools }                           from '@tanstack/react-router-devtools';
 import { ColorSchemeToggle }                                from '@/components/ColorSchemeToggle';
-import { Alert }                                            from '@/components/GameBoard/Alert';
+import { Alert }                                            from '@/components/Alert';
 import '@/styles/index.css';
 
 export const Route = createRootRoute({
