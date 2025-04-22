@@ -1,0 +1,23 @@
+# !!! WARNING: DO NOT USE THIS FILE FOR ACTUAL PRODUCTION CONFIGURATIONS !!!
+#
+# Production configurations MUST be supplied via environment variables at runtime (prefixed with WORDLE_).
+# Example (override values using CLI):
+#
+#   WORDLE_DATABASE_HOST=db.prod.example.com \
+#   WORDLE_DATABASE_USER=prod_user \
+#   WORDLE_DATABASE_PASSWORD=$(vault read -field=password db/prod) \
+#   make prod
+#
+# Refer to `server/configuration/configuration.go` for the list of available environment variables at `environmentBindings`
+# This file exists only for reference and should be excluded in CI/CD pipelines.
+
+[server]
+cors_allowed_origins = ["http://localhost:3000"]
+
+[database]
+host = "db" # from docker-compose
+port = 5432
+user = "postgres"
+password = "password"
+name = "postgres"
+ssl_mode = "disable"
