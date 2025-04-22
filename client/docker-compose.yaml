@@ -1,0 +1,21 @@
+networks:
+    wordle:
+
+services:
+    wordle.web:
+        command: [ "serve", "-s", ".", "-l", "${PORT:-3000}" ]
+        container_name: wordle.web
+        image: wordle.web
+        networks:
+            - wordle
+        build:
+            context: .
+            dockerfile: Dockerfile
+        stdin_open: true
+        tty: true
+        restart: on-failure
+        ports:
+            - "${PORT:-3000}:3000" # default port is 3000
+        environment:
+            - NODE_ENV=production
+            - TZ=Asia/Hong_Kong

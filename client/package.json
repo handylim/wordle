@@ -1,0 +1,44 @@
+{
+  "name": "@wordle/client",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.8.1",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "dev": "vite --port=3000",
+    "build": "vite build",
+    "serve": "vite preview --port=3000",
+    "start": "vite"
+  },
+  "devDependencies": {
+    "@tanstack/router-plugin": "~1.116.1",
+    "@tanstack/react-router-devtools": "~1.116.0",
+    "@tailwindcss/vite": "~4.1.4",
+    "@types/node": "~22.14.1",
+    "@types/react": "~19.1.2",
+    "@types/react-dom": "~19.1.2",
+    "@vitejs/plugin-react": "~4.4.1",
+    "autoprefixer": "~10.4.21",
+    "js-toml": "~1.0.1",
+    "tailwindcss": "~4.1.4",
+    "tailwindcss-react-aria-components": "~2.0.0",
+    "tsdef": "~0.0.14",
+    "vite": "~6.3.2",
+    "vite-tsconfig-paths": "~5.1.4"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "~2.7.0",
+    "@tanstack/react-router": "~1.116.0",
+    "clsx": "~2.1.1",
+    "date-fns": "~4.1.0",
+    "react": "~19.1.0",
+    "react-aria": "~3.39.0",
+    "react-aria-components": "~1.8.0",
+    "react-dom": "~19.1.0",
+    "react-hotkeys-hook": "~5.0.1",
+    "react-redux": "~9.2.0",
+    "tailwind-merge": "~3.2.0",
+    "zod": "~3.24.3"
+  }
+}
