@@ -8,19 +8,44 @@ import fs                     from 'node:fs';
 import path                   from 'node:path';
 import { z }                  from 'zod';
 
-const configSchema = z.object({
-	                              rounds: z.number().int().gt(1),
-	                              words : z.array(z.string().length(5).transform(value => value.toLowerCase()))
-                              });
+const loadConfig = () => {
+	const configSchema = z.object({
+		                              API_URL: z.string().url()
+	                              });
 
-const parsedConfig = load(fs.readFileSync('config.toml', 'utf-8'));
-const config       = configSchema.parse(parsedConfig);
+	const parsedConfig = load(fs.readFileSync('config.toml', 'utf-8'));
+	const config       = configSchema.parse(parsedConfig);
+
+	const defineValues: Record<string, string> = {}
+
+	const flattenObject = (obj: any, prefix: string = 'import.meta.env.VITE_') => {
+		Object.entries(obj).forEach(([key, value]) => {
+			const envKey = key.toUpperCase()
+
+			if (Array.isArray(value))
+				defineValues[`import.meta.env.VITE_${envKey}`] = JSON.stringify(value)
+			else if (typeof value === 'object' && value !== null) {
+				// Handle nested objects
+				Object.entries(value)
+				      .forEach(([nestedKey, nestedValue]) => {
+					      const nestedEnvKey = `${envKey}_${nestedKey.toUpperCase()}`
+
+					      // Handle nested arrays and regular nested values
+					      defineValues[`import.meta.env.VITE_${nestedEnvKey}`] = JSON.stringify(nestedValue)
+				      })
+			}
+			else
+				defineValues[`import.meta.env.VITE_${envKey}`] = JSON.stringify(value)
+		})
+	}
+
+	flattenObject(config)
+
+	return defineValues
+}
 
 export default defineConfig({
-	                            define : Object.entries(config || {}).reduce((acc, [key, value]) => {
-		                            acc[`import.meta.env.VITE_${key.toUpperCase()}`] = value;
-		                            return acc;
-	                            }, {} as Record<string, number | Array<string>>),
+	                            define : loadConfig(),
 	                            plugins: [tsconfigPaths(),
 	                                      TanStackRouterVite({ target: 'react', autoCodeSplitting: true }),
 	                                      react(),

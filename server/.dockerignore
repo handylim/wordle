@@ -1,0 +1,18 @@
+# Ignore git repository files
+.git
+.gitignore
+
+# Ignore Docker-related files
+Dockerfile
+.dockerignore
+
+# Ignore editor or OS-specific files
+**/.DS_Store
+Thumbs.db
+*.swp
+
+# Ignore go vendor installation
+vendor
+
+# Miscellaneous
+README.md

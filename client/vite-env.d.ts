@@ -2,8 +2,7 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-	readonly VITE_ROUNDS: number;
-	readonly VITE_WORDS: Array<string>;
+	readonly VITE_API_URL: string
 }
 
 interface ImportMeta {

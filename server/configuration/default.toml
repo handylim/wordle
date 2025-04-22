@@ -1,0 +1,73 @@
+[server]
+port = 8080
+timeout = 30
+cors_allowed_origins = []
+
+[database]
+host = ""
+port = 0
+user = ""
+password = ""
+name = ""
+max_open_conns = 25
+max_idle_conns = 5
+ssl_mode = ""
+time_zone = "Asia/Hong_Kong"
+
+[game]
+# Number of rounds per game
+max_rounds = 6
+
+# List of valid five-letter words
+words = [
+	"apple",
+	"brick",
+	"crane",
+	"drive",
+	"flute",
+	"glove",
+	"heart",
+	"joker",
+	"knock",
+	"latch",
+	"mango",
+	"noble",
+	"ocean",
+	"plumb",
+	"queen",
+	"racer",
+	"sight",
+	"tease",
+	"vivid",
+	"witty",
+	"xenon",
+	"yacht",
+	"zebra",
+	"badge",
+	"clear",
+	"dance",
+	"eagle",
+	"flock",
+	"grape",
+	"haunt",
+	"irony",
+	"jumbo",
+	"kneel",
+	"lemon",
+	"model",
+	"nurse",
+	"overt",
+	"plume",
+	"quake",
+	"reign",
+	"snack",
+	"tramp",
+	"unite",
+	"vocal",
+	"whale",
+	"yield",
+	"zooom",
+	"acorn",
+	"beach",
+	"charm"
+]
